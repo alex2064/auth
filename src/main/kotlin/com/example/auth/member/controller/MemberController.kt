@@ -2,6 +2,7 @@ package com.example.auth.member.controller
 
 import com.example.auth.common.authority.TokenInfo
 import com.example.auth.common.dto.BaseResponse
+import com.example.auth.common.dto.CustomUser
 import com.example.auth.member.dto.LoginDto
 import com.example.auth.member.dto.MemberDtoRequest
 import com.example.auth.member.dto.MemberDtoResponse
@@ -37,9 +38,10 @@ class MemberController(
     /**
      * 내 정보 보기
      */
-    @GetMapping("/info/{id}")
-    fun searchMyInfo(@PathVariable id: Long): BaseResponse<MemberDtoResponse> {
-        val response = memberService.searchMyInfo(id)
+    @GetMapping("/info")
+    fun searchMyInfo(): BaseResponse<MemberDtoResponse> {
+        val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
+        val response = memberService.searchMyInfo(userId)
         return BaseResponse(data = response)
     }
 }
