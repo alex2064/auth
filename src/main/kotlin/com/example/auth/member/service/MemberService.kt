@@ -28,7 +28,7 @@ class MemberService(
     /**
      * 회원가입
      */
-    fun signUp(memberDtoRequest: MemberDtoRequest): Boolean {
+    fun signUp(memberDtoRequest: MemberDtoRequest): String {
         var member: Member? = memberRepository.findByLoginId(memberDtoRequest.loginId)
         if (member != null) {
             throw InvalidInputException("loginId", "이미 등록된 ID 입니다.")
@@ -42,7 +42,7 @@ class MemberService(
         val memberRole = MemberRole(null, ROLE.MEMBER, member)
         memberRoleRepository.save(memberRole)
 
-        return true
+        return "회원가입이 완료되었습니다."
     }
 
     /**
@@ -66,9 +66,9 @@ class MemberService(
     /**
      * 내 정보 수정
      */
-    fun saveMyInfo(memberDtoRequest: MemberDtoRequest): Boolean {
+    fun saveMyInfo(memberDtoRequest: MemberDtoRequest): String {
         val member = memberDtoRequest.toEntity()
         memberRepository.save(member)
-        return true
+        return "수정 완료되었습니다."
     }
 }
