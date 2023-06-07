@@ -68,6 +68,9 @@ class JwtTokenProvider {
         return UsernamePasswordAuthenticationToken(principal, "", authorities)
     }
 
+    /**
+     * Token 검증
+     */
     fun validateToken(token: String): Boolean {
         try {
             getClaims(token)
