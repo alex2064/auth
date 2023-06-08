@@ -49,7 +49,9 @@ class MemberService(
      * 로그인 -> 토근 발행
      */
     fun login(loginDto: LoginDto): TokenInfo {
+        // 요청한 LoginId, password 기준으로 UsernamePasswordAuthenticationToken 생성
         val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.loginId, loginDto.password)
+        // authenticate() 가 실행될때 CustomUserDetailsService > loadUserByUsername가 호출되면서 DB에 있는 Member 정보를 불러와서 비교
         val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
 
         return jwtTokenProvider.createToken(authentication)

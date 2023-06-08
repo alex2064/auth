@@ -22,6 +22,9 @@ class JwtAuthenticationFilter(
         chain?.doFilter(request, response)
     }
 
+    /**
+     * Token 정보 추출
+     */
     private fun resolveToken(request: HttpServletRequest): String? {
         val bearerToken = request.getHeader("Authorization")
 

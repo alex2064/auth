@@ -23,7 +23,7 @@ class MemberController(
     @PostMapping("/signup")
     fun signUp(@RequestBody @Valid memberDtoRequest: MemberDtoRequest): BaseResponse<Unit> {
         val resultMsg: String = memberService.signUp(memberDtoRequest)
-        return BaseResponse(messase = resultMsg)
+        return BaseResponse(message = resultMsg)
     }
 
     /**
@@ -53,6 +53,6 @@ class MemberController(
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).userId
         memberDtoRequest.id = userId
         val resultMsg: String = memberService.saveMyInfo(memberDtoRequest)
-        return BaseResponse(messase = resultMsg)
+        return BaseResponse(message = resultMsg)
     }
 }
