@@ -81,17 +81,13 @@ data class MemberDtoResponse(
     val email: String,
 )
 
-data class LoginDto(
+class LoginDto(
+    loginId: String?,
+    password: String?,
+) {
     @field:NotBlank
-    @JsonProperty("loginId")
-    private val _loginId: String?,
+    val loginId: String = loginId ?: ""
 
     @field:NotBlank
-    @JsonProperty("password")
-    private val _password: String?,
-) {
-    val loginId: String
-        get() = _loginId!!
-    val password: String
-        get() = _password!!
+    val password: String = password ?: ""
 }
